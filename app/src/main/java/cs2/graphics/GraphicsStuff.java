@@ -1,9 +1,13 @@
 package cs2.graphics;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
@@ -58,9 +62,62 @@ public class GraphicsStuff extends Application {
     g.setStroke(Color.BLACK);
     g.setLineWidth(1);
 
-    drawCircle(g, 300,300,150);
+    //drawCircle(g, 300,300,150);
 
+    
+
+    canva.setOnMouseDragged( (MouseEvent event) -> {
+      g.setStroke(Color.rgb(200,50,0,0.5));
+      //g.strokeLine(canva.getWidth()/2,canva.getHeight()/2, event.getX(),event.getY());
+      g.strokeLine(prevX,prevY, event.getX(),event.getY());
+      prevX = event.getX();
+      prevY = event.getY();
+    });
+    canva.setOnMousePressed( (MouseEvent event) -> {
+      prevX = event.getX();
+      prevY = event.getY();
+    });
+    canva.setOnMouseReleased( (MouseEvent event) -> {
+      g.setFill(Color.BLACK);
+      g.fillText("ENDPT", event.getX(), event.getY());
+    });
+    canva.setOnKeyPressed( (KeyEvent event) -> {
+      System.out.println(event.getCode());
+      if(event.getCode() == KeyCode.SPACE) {
+        g.setFill(Color.WHITE);
+        g.fillRect(0,0, canva.getWidth(),canva.getHeight());
+      }
+    });
+
+    AnimationTimer timer = new AnimationTimer() {
+      public void handle(long t) {
+        g.setFill(Color.WHITE);
+        g.fillRect(0,0, canva.getWidth(),canva.getHeight());
+
+        g.setFill(Color.RED);
+        g.fillOval(xpos,ypos, 50,50);
+        xpos += xvel;
+        ypos += yvel;
+        if(xpos+50 >= canva.getWidth() || xpos <= 0) {
+          xvel = -1 * xvel;
+        }
+        if(ypos+50 >= canva.getHeight() || ypos <= 0) {
+          yvel = -1 * yvel;
+        }
+      }
+    };
+    timer.start();
+
+    canva.requestFocus();
   }
+
+  double xpos = 200;
+  double ypos = 200;
+  double xvel = Math.random() * 10 - 5;
+  double yvel = Math.random() * 10 - 5;
+
+  double prevX = 0;
+  double prevY = 0;
 
   public void drawCircle(GraphicsContext g, double x, double y, double r) {
     g.strokeOval(x-r,y-r, r*2,r*2);
