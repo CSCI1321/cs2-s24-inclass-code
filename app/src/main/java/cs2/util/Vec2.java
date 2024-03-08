@@ -12,9 +12,13 @@ public class Vec2 {
     this.x = 0;
     this.y = 0;
   }
+  public Vec2(Vec2 toCopy) {
+    this.x = toCopy.x;
+    this.y = toCopy.y;
+  }
 
   public static Vec2 random() {
-    return new Vec2(Math.random() * 1 - 0.5, Math.random() * 1 - .5);
+    return new Vec2(Math.random() * 10 - 5, Math.random() * 10 - 5);
   }
 
   public double getX() { return this.x; }
@@ -24,6 +28,11 @@ public class Vec2 {
     this.x += other.x;
     this.y += other.y;
   }
+
+  public Vec2 clone() {
+    return new Vec2(this.x, this.y);
+  }
+
   /**
    * This version of add produces a new Vec2
    * @param other

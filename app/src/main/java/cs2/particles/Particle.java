@@ -6,10 +6,10 @@ import javafx.scene.paint.Color;
 
 public class Particle {
   //Fields
-  private Vec2 pos;
-  private Vec2 vel;
-  private double sz;
-  private Color col;
+  protected Vec2 pos;
+  protected Vec2 vel;
+  protected double sz;
+  protected Color col;
 
   //Constructor
   public Particle(Vec2 initPos, Vec2 initVel) {
@@ -26,5 +26,8 @@ public class Particle {
   }
   public void update() {
     pos.addThis(vel);
+  }
+  public void addForce(Vec2 force) {
+    vel.addThis(force);
   }
 }

@@ -1,11 +1,14 @@
 package cs2.particles;
 
+import java.util.ArrayList;
+
 import cs2.util.Vec2;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -20,23 +23,33 @@ public class ParticleSystemApp extends Application {
     GraphicsContext g = canva.getGraphicsContext2D();
 
     //Particle p = new Particle(new Vec2(200,200), Vec2.random());
-    ParticleSystem ps = new ParticleSystem(new Vec2(300,300));
+    ArrayList<ParticleSystem> ps = new ArrayList<ParticleSystem>();
+    //new ParticleSystem(new Vec2(300,300));
 
     AnimationTimer timer = new AnimationTimer() {
       public void handle(long t) {
         g.setFill(Color.WHITE);
         g.fillRect(0,0, 600,600);
 
-        //p.display(g);
-        //p.update();
-        //for(int i=0;i<1000;i++) {
-        //  ps.addParticle(new Particle(new Vec2(200,200), Vec2.random()));
-        //}
-        ps.addParticle();
-        ps.run(g);
+        for(int i=0; i<ps.size(); i++) {
+          ps.get(i).addParticle();
+          ps.get(i).addForce(new Vec2(0,0.3));
+          ps.get(i).addForce(wind);
+          ps.get(i).run(g);
+        }
       }
     };
     timer.start();
 
+    canva.setOnMousePressed((MouseEvent e) -> {
+      ParticleSystem newSys = new ParticleSystem(new Vec2(e.getX(),e.getY()));
+      ps.add(newSys);
+    });
+    canva.setOnMouseMoved((MouseEvent e) -> {
+      wind = new Vec2(e.getX() / 300 - 1, 0);
+    });
   }
+
+  Vec2 wind = new Vec2();
+
 }
