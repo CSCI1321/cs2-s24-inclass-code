@@ -21,7 +21,11 @@ public class ParticleSystem {
     parts.add(p);
   }
   public void addParticle() {
-    parts.add(new Particle(origin.clone(), Vec2.random()));
+    if(Math.random() < 0.5) {
+      parts.add(new RoundParticle(origin.clone(), Vec2.random()));
+    } else {
+      parts.add(new SquareParticle(origin.clone(), Vec2.random()));
+    }
   }
 
   public void run(GraphicsContext g) {

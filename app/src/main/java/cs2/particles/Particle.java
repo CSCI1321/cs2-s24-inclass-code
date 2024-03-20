@@ -4,7 +4,7 @@ import cs2.util.Vec2;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Particle {
+public abstract class Particle {
   //Fields
   protected Vec2 pos;
   protected Vec2 vel;
@@ -20,10 +20,8 @@ public class Particle {
   }
 
   //Methods
-  public void display(GraphicsContext g) {
-    g.setFill(col);
-    g.fillOval(pos.getX(), pos.getY(), sz, sz);
-  }
+  public abstract void display(GraphicsContext g);
+
   public void update() {
     pos.addThis(vel);
   }

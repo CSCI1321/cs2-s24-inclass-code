@@ -1,5 +1,7 @@
 package cs2.util;
 
+import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
+
 public class Vec2 {
   private double x;
   private double y;
@@ -17,6 +19,12 @@ public class Vec2 {
     this.y = toCopy.y;
   }
 
+  @Override
+  public String toString() {
+    return "(" + this.x + "," + this.y + ")";
+  }
+
+
   public static Vec2 random() {
     return new Vec2(Math.random() * 10 - 5, Math.random() * 10 - 5);
   }
@@ -29,6 +37,7 @@ public class Vec2 {
     this.y += other.y;
   }
 
+  @Override
   public Vec2 clone() {
     return new Vec2(this.x, this.y);
   }
