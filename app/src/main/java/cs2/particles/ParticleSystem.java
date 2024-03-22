@@ -21,18 +21,21 @@ public class ParticleSystem {
     parts.add(p);
   }
   public void addParticle() {
+    parts.add(new ImageParticle(origin.clone(), Vec2.random(), ParticleSystemApp.img));
+    //parts.add(new RainbowParticle(origin.clone(), Vec2.random()));
+    /* 
     if(Math.random() < 0.5) {
       parts.add(new RoundParticle(origin.clone(), Vec2.random()));
     } else {
       parts.add(new SquareParticle(origin.clone(), Vec2.random()));
-    }
+    }*/
   }
 
   public void run(GraphicsContext g) {
     System.out.println(parts.size());
     for(int i=0; i<parts.size(); i++) {
-      parts.get(i).display(g);
       parts.get(i).update();
+      parts.get(i).display(g);
     }
   }
   public void addForce(Vec2 force) {
