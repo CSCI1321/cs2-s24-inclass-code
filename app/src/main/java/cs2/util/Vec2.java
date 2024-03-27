@@ -1,10 +1,14 @@
 package cs2.util;
 
-import com.google.errorprone.annotations.OverridingMethodsMustInvokeSuper;
-
-public class Vec2 {
+public class Vec2 implements Comparable<Vec2> {
   private double x;
   private double y;
+
+  public int compareTo(Vec2 other) {
+    if(this.x < other.x) return -1;
+    else if(this.x > other.x) return +1;
+    else return 0;
+  }
 
   public Vec2(double inX, double inY) {
     this.x = inX;
