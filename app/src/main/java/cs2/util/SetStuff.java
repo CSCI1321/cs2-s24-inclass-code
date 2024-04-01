@@ -25,12 +25,16 @@ public class SetStuff {
     System.out.println(set);
     System.out.println(set.size());
 
+
+    System.out.println("------");
+    set.add("TheEND");
+    System.out.println(set);
     Iterator<String> it = set.iterator();
     while(it.hasNext()) {
-      System.out.println(it.next());
+      String theNextThing = it.next();
+      System.out.println(theNextThing);
+      System.out.println(theNextThing);
     }
-
-
 
   }
 }
