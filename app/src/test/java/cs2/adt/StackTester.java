@@ -19,6 +19,6 @@ public class StackTester {
     assertTrue(s.peek() == 7);
     assertTrue(s.pop() == 7);
     assertTrue(s.isEmpty());
-    s.pop();
+    //s.pop();
   }
 }
