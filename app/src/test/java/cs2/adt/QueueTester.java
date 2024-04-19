@@ -10,7 +10,7 @@ public class QueueTester {
 
   @BeforeEach
   void init() {
-    q = new ArrayQueue<Integer>();
+    q = new LinkedQueue<Integer>();
   }
 
   @Test
@@ -25,6 +25,31 @@ public class QueueTester {
 
   @Test
   void testEnDeMulti() {
+    assertTrue(q.isEmpty());
+    for(int i=0; i<100; i++) {
+      q.enqueue(i);
+      assertFalse(q.isEmpty());
+      assertEquals(q.peek(), 0);
+    }
+    for(int i=0; i<100; i++) {
+      assertEquals(q.peek(), i);
+      assertEquals(q.dequeue(), i);
+    }
+    assertTrue(q.isEmpty());
+  }
+
+  @Test
+  void testEnDeMultiTwice() {
+    assertTrue(q.isEmpty());
+    for(int i=0; i<100; i++) {
+      q.enqueue(i);
+      assertFalse(q.isEmpty());
+      assertEquals(q.peek(), 0);
+    }
+    for(int i=0; i<100; i++) {
+      assertEquals(q.peek(), i);
+      assertEquals(q.dequeue(), i);
+    }
     assertTrue(q.isEmpty());
     for(int i=0; i<100; i++) {
       q.enqueue(i);
