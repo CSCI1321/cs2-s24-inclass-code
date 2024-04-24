@@ -1,4 +1,6 @@
 package cs2.adt;
+import java.lang.*;
+import java.util.NoSuchElementException;
 
 public class LinkedQueue<T> implements Queue<T> {
   private class Node {
@@ -26,6 +28,9 @@ public class LinkedQueue<T> implements Queue<T> {
     }
   }
   public T dequeue() {
+    if(isEmpty()) {
+      throw new NoSuchElementException();
+    }
     T tmp = head.data;
     head = head.next;
     if(head == null) {
@@ -34,6 +39,9 @@ public class LinkedQueue<T> implements Queue<T> {
     return tmp;
   }
   public T peek() {
+    if(isEmpty()) {
+      throw new NoSuchElementException();
+    }
     return head.data;
   }
   public boolean isEmpty() {

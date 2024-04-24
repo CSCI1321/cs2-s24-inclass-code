@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.NoSuchElementException;
 
 public class QueueTester {
   private Queue<Integer> q;
@@ -61,6 +62,21 @@ public class QueueTester {
       assertEquals(q.dequeue(), i);
     }
     assertTrue(q.isEmpty());
+  }
+
+  @Test
+  void testExceptions() {
+    try {
+      q.dequeue();
+      //Being here is bad
+      //assertTrue(false);
+      fail("Exception not thrown when dequeue empty queue");
+    }
+    catch (NoSuchElementException e) {
+      //Being here is good
+    }
+
+
   }
 
   
